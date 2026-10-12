@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'pneumonia/style.css' %}">
+    <title>Pneumonia Detector</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Pneumonia Detection <span>AI</span></h1>
+        <p class="subtitle">Učitajte rendgensku snimku (X-Ray) za trenutnu analizu umjetne inteligencije.</p>
+    </header>
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+        {% csrf_token %}
+        <div class="drop-zone">
+            <span class="drop-zone__prompt">Kliknite ovdje ili odvucite X-Ray sliku</span>
+            <input type="file" name="image" class="drop-zone__input" required onchange="this.form.submit()">
+        </div>
+        </form>
+
+    {% if prediction %}
+
+    <div class="result-card {% if prediction == 'PNEUMONIA' %}card-bad{% else %}card-good{% endif %}">
+        
+        <div class="result-header">
+            <div class="label {% if prediction == 'PNEUMONIA' %}bad{% else %}good{% endif %}">
+                {% if prediction == 'PNEUMONIA' %}
+                    ⚠️ PNEUMONIJA DETEKTIRANA
+                {% else %}
+                    ✅ NALAZ U REDU (NORMAL)
+                {% endif %}
+            </div>
+
+            <div class="prob">
+                Vjerojatnost da ima upalu pluća: <span>{{ probability }}</span>
+            </div>
+        </div>
+
+        <div class="image-container">
+
+            <div class="image-box">
+                <h3>Originalni X-Ray</h3>
+                <div class="img-wrapper">
+                    <img src="{{ image_url }}" alt="Original X-Ray">
+                </div>
+            </div>
+
+            {% if gradcam_url %}
+            <div class="image-box">
+                <h3>Grad-CAM Vizualizacija</h3>
+                <div class="img-wrapper">
+                    <img src="{{ gradcam_url }}" alt="Grad-CAM">
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>

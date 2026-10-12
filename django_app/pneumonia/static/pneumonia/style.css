@@ -1,0 +1,210 @@
+/* Google Fonts za moderniji izgled */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #090d16;  /* Još malo dublja i glađa tamna boja */
+    margin: 0;
+    padding: 0;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+h1 span {
+    color: #38bdf8;
+    background: linear-gradient(to right, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* --- MODERNA DROP ZONA ZA FILE UPLOAD --- */
+.upload-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.drop-zone {
+    width: 100%;
+    max-width: 500px;
+    height: 120px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    color: #94a3b8;
+    border: 2px dashed #334155;
+    border-radius: 12px;
+    background: #141b2d;
+    transition: all 0.3s ease;
+}
+
+.drop-zone:hover {
+    border-color: #38bdf8;
+    background: #172237;
+    color: #38bdf8;
+}
+
+.drop-zone__input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+}
+
+/* Relativna pozicija forme kako bi skriveni input pokrio cijelu zonu */
+.upload-form {
+    position: relative;
+}
+
+/* --- KARTICA S REZULTATIMA --- */
+.result-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Dinamični sjaj (Glow) ovisno o rezultatu */
+.card-good {
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow: 0 0 25px rgba(34, 197, 94, 0.1);
+}
+
+.card-bad {
+    border-color: rgba(239, 68, 68, 0.3);
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.1);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1f2937;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.label {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.good { color: #4ade80; }
+.bad { color: #f87171; }
+
+.prob {
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+.prob span {
+    color: #ffffff;
+    font-weight: 600;
+    background: #1e293b;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-left: 5px;
+    border: 1px solid #334155;
+}
+
+/* --- DIJELJENJE SLIKA --- */
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.image-box {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+}
+
+.image-box h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.img-wrapper {
+    background: #000000;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: 320px; /* Malo povećano radi bolje vidljivosti detalja */
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+}
+
+/* Glatka animacija pojavljivanja rezultata */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Prilagodljivost za mobitele */
+@media (max-width: 640px) {
+    .result-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .image-box {
+        max-width: 100%;
+    }
+}
